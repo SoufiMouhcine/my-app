@@ -1,4 +1,24 @@
 pipeline{
+   agent any
+   stages{
+     stage('---clean---'){
+       steps{
+         sh "mvn clean"
+       }
+     }
+     stage('--test--'){
+       steps{
+         sh "mvn test"
+       }
+     }
+     stage('--package--'){
+       steps{
+         sh "mvn package"
+       }
+     }
+   }
+}
+pipeline{
 agent any
         tools{
         maven 'Maven'
@@ -28,7 +48,15 @@ agent any
                       }
                    }
                 }
-                
+                stage('couverture'){
+                   steps{
+                      bat 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
+                      }
+                   post{
+                     always{
+                         cobertura coberturaReportFile: '**/target/site/cobertura/coverage.xml'
+                           }
+                       }
                   }
-                                 
+               }                   
 }
