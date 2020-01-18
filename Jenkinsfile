@@ -3,8 +3,7 @@ pipeline{
    stages{
      stage('---clean---'){
         steps{
-           def=mvnHome = tool name: 'maven-3', type: 'maven'
-           sh "${mvnHome}/bin/mvn clean"
+           sh "mvn clean"
         }
      }
      stage('--test--'){
