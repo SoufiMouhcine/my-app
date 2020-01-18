@@ -1,5 +1,9 @@
 pipeline{
    agent any
+    tools{
+        maven 'Maven'
+        jdk 'java_8'
+        }
    stages{
      stage('---clean---'){
        steps{
@@ -16,15 +20,7 @@ pipeline{
          sh "mvn package"
        }
      }
-   }
-}
-pipeline{
-agent any
-        tools{
-        maven 'Maven'
-        jdk 'java_8'
-        }
-        stages{
+
               stage('build'){
                             steps{
                             bat 'mvn compiler:compile'
