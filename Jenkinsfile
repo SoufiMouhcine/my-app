@@ -1,26 +1,34 @@
 pipeline{
    agent any
-    tools{
+   tools{
         maven 'Maven'
         jdk 'java_8'
         }
    stages{
      stage('---clean---'){
        steps{
-         sh "mvn clean"
+         bat "mvn clean"
        }
      }
      stage('--test--'){
        steps{
-         sh "mvn test"
+         bat "mvn test"
        }
      }
      stage('--package--'){
        steps{
-         sh "mvn package"
+         bat "mvn package"
        }
      }
-
+   }
+}
+pipeline{
+agent any
+        tools{
+        maven 'Maven'
+        jdk 'java_8'
+        }
+        stages{
               stage('build'){
                             steps{
                             bat 'mvn compiler:compile'
