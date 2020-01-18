@@ -20,15 +20,8 @@ pipeline{
          bat "mvn package"
        }
      }
-   }
-}
-pipeline{
-agent any
-        tools{
-        maven 'Maven'
-        jdk 'java_8'
-        }
-        stages{
+
+
               stage('build'){
                             steps{
                             bat 'mvn compiler:compile'
@@ -56,11 +49,7 @@ agent any
                    steps{
                       bat 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
                       }
-                   post{
-                     always{
-                         cobertura coberturaReportFile: '**/target/site/cobertura/coverage.xml'
-                           }
-                       }
+                   
                   }
                }                   
 }
